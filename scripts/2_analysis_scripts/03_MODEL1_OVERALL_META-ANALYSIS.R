@@ -27,7 +27,7 @@ rm(list=ls())
 ##### libraries & functions ####
 ##
 ##
-devtools::install_github("daniel1noble/orchaRd", force = TRUE)
+#devtools::install_github("daniel1noble/orchaRd", force = TRUE)
 library(orchaRd)
 
 pacman::p_load(openxlsx, dplyr, tidyr, 

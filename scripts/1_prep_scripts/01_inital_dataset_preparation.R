@@ -238,6 +238,15 @@ head(df06)
 table(df06$Biomarker_Category)
 
 ##
+## year of publication
+df06$year_publication <- substr(x = df06$References, start = nchar(df06$References)-4, stop = nchar(df06$References))
+df06$year_publication <- gsub("a", "", df06$year_publication)
+df06$year_publication <- gsub("b", "", df06$year_publication)
+df06$year_publication <- gsub(" ", "", df06$year_publication)
+range(df06$year_publication)
+
+
+##
 ##
 ##### Observations per groups / levels of moderators #####
 ##
