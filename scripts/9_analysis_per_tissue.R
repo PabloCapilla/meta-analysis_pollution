@@ -28,11 +28,11 @@ source("./scripts/0a_R_library/orchard_plot_PCL_noApples.R")
 
 ## 
 ## phylogeny corr matrix
-phylo_cor <- readRDS("./results/clean_data/20220225_data_phylo_cor.RDS")
+phylo_cor <- readRDS("./results/clean_data/20221011_data_phylo_cor.RDS")
 
 ##
 ## effect size data
-df00  <- readRDS("./results/clean_data/clean_analysis_20220225.RDS")
+df00  <- readRDS("./results/clean_data/clean_analysis_20221011.RDS")
 head(df00)
 
 ##
@@ -133,21 +133,20 @@ round(r2_ml(model = model2_marker),
 ##
 library(wesanderson)
 names(wes_palettes)
-biomarker_plot <- orchard_plot_PCL(object = model9_tissue, 
+biomarker_plot <- orchard_plot(object = model9_tissue, 
                                    mod = "Biological.Matrix", 
-                                   est_point_size = 5,
-                                   alpha = 0.5,
-                                   cb = FALSE,
-                                   xlab = "lnRR", 
-                                   ylab = "Biomarker",
-                                   transfm = "none", 
-                                   angle = 45) +
-  theme(axis.title = element_text("Arial", size = 15),
-        axis.text.x = element_text("Arial", size = 15)) 
+                                group = "References",
+                                trunk.size = 10,
+                                cb = FALSE,
+                                data = df_tissue,
+                                xlab = "lnRR", 
+                                transfm = "none") +
+  theme(axis.title = element_text(size = 15),
+        axis.text.x = element_text(size = 15)) 
 
-ggsave(filename = "./plots/model9_biomarker.jpeg", 
+ggsave(filename = "./plots/model9_biomarker.pdf", 
        plot = biomarker_plot, 
-       device = "jpeg", 
+       device = "pdf", 
        height = 100, 
        width = 200, 
        units = "mm")

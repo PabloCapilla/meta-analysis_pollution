@@ -29,11 +29,11 @@ source("./scripts/0a_R_library/orchard_plot_PCL_noApples.R")
 
 ## 
 ## phylogeny corr matrix
-phylo_cor <- readRDS("./results/clean_data/20220205_data_phylo_cor.RDS")
+phylo_cor <- readRDS("./results/clean_data/20221011_data_phylo_cor.RDS")
 
 ##
 ## effect size data
-df00  <- readRDS("./results/clean_data/clean_analysis_20220209.RDS")
+df00  <- readRDS("./results/clean_data/clean_analysis_20221011.RDS")
 head(df00)
 
 ##
@@ -107,25 +107,24 @@ round(r2_ml(model = model71_marker_herbicide),  # % var explained by moderator
 
 
 # plot
-biomarker_herbicide_plot <- orchard_plot_PCL(object = model71_marker_herbicide, 
+biomarker_herbicide_plot <- orchard_plot(object = model71_marker_herbicide, 
                                              mod = "Specific.Biomarker", 
-                                             est_point_size = 5,
-                                             alpha = 0.5,
+                                             group = "References",
+                                             trunk.size = 10,
                                              cb = FALSE,
+                                             data = df_herbicide,
                                              xlab = "lnRR", 
-                                             ylab = "Biomarker",
-                                             transfm = "none", 
-                                             angle = 45) +
-  theme(axis.title = element_text("Arial", size = 10),
-        axis.text.x = element_text("Arial", size = 10)) +
+                                             transfm = "none") +
+  theme(axis.title = element_text(size = 10),
+        axis.text.x = element_text(size = 10)) +
   scale_fill_manual(values = wes_palette("FantasticFox1", n = 5)) +
   scale_color_manual(values = wes_palette("FantasticFox1", n = 5)) +
   labs(title = "Herbicide")
 
-ggsave(filename = "./plots/model71_marker_herbicide.jpeg", 
+ggsave(filename = "./plots/model71_marker_herbicide.pdf", 
        plot = biomarker_herbicide_plot, 
-       device = "jpeg", 
-       height = 75, 
+       device = "pdf", 
+       height = 125, 
        width = 200, 
        units = "mm")
 
@@ -163,25 +162,24 @@ round(r2_ml(model = model72_marker_Metallic_elements),  # % var explained by mod
 
 
 # plot
-marker_Metallic_elements_plot <- orchard_plot_PCL(object = model72_marker_Metallic_elements, 
+marker_Metallic_elements_plot <- orchard_plot(object = model72_marker_Metallic_elements, 
                                                   mod = "Specific.Biomarker", 
-                                                  est_point_size = 5,
-                                                  alpha = 0.5,
+                                                  group = "References",
+                                                  trunk.size = 10,
                                                   cb = FALSE,
+                                                  data = df_Metallic_elements,
                                                   xlab = "lnRR", 
-                                                  ylab = "Biomarker",
-                                                  transfm = "none", 
-                                                  angle = 45) +
-  theme(axis.title = element_text("Arial", size = 10),
-        axis.text.x = element_text("Arial", size = 10)) +
+                                                  transfm = "none") +
+  theme(axis.title = element_text(size = 10),
+        axis.text.x = element_text(size = 10)) +
   scale_fill_manual(values = wes_palette("FantasticFox1", n = 5)) +
   scale_color_manual(values = wes_palette("FantasticFox1", n = 5)) +
   labs(title = "Metallic elements")
 
-ggsave(filename = "./plots/model72_marker_Metallic_elements.jpeg", 
+ggsave(filename = "./plots/model72_marker_Metallic_elements.pdf", 
        plot = marker_Metallic_elements_plot, 
-       device = "jpeg", 
-       height = 75, 
+       device = "pdf", 
+       height = 125, 
        width = 200, 
        units = "mm")
 
@@ -220,25 +218,24 @@ round(r2_ml(model = model73_marker_inorganic),  # % var explained by moderator
 
 
 # plot
-marker_inorganic_plot <- orchard_plot_PCL(object = model73_marker_inorganic, 
+marker_inorganic_plot <- orchard_plot(object = model73_marker_inorganic, 
                                           mod = "Specific.Biomarker", 
-                                          est_point_size = 5,
-                                          alpha = 0.5,
+                                          group = "References",
+                                          trunk.size = 10,
                                           cb = FALSE,
+                                          data = df_inorganic,
                                           xlab = "lnRR", 
-                                          ylab = "Biomarker",
-                                          transfm = "none", 
-                                          angle = 45) +
-  theme(axis.title = element_text("Arial", size = 10),
-        axis.text.x = element_text("Arial", size = 10)) +
+                                          transfm = "none") +
+  theme(axis.title = element_text(size = 10),
+        axis.text.x = element_text(size = 10)) +
   scale_fill_manual(values = wes_palette("FantasticFox1", n = 5)) +
   scale_color_manual(values = wes_palette("FantasticFox1", n = 5)) +
   labs(title = "Other inorganic")
 
-ggsave(filename = "./plots/model73_marker_inorganic.jpeg", 
+ggsave(filename = "./plots/model73_marker_inorganic.pdf", 
        plot = marker_inorganic_plot, 
-       device = "jpeg", 
-       height = 75, 
+       device = "pdf", 
+       height = 125, 
        width = 200, 
        units = "mm")
 
@@ -274,25 +271,24 @@ round(r2_ml(model = model74_marker_organic),  # % var explained by moderator
 
 
 # plot
-marker_organic_plot <- orchard_plot_PCL(object = model74_marker_organic, 
+marker_organic_plot <- orchard_plot(object = model74_marker_organic, 
                                         mod = "Specific.Biomarker", 
-                                        est_point_size = 5,
-                                        alpha = 0.5,
+                                        group = "References",
+                                        trunk.size = 10,
                                         cb = FALSE,
+                                        data = df_organic,
                                         xlab = "lnRR", 
-                                        ylab = "Biomarker",
-                                        transfm = "none", 
-                                        angle = 45) +
-  theme(axis.title = element_text("Arial", size = 10),
-        axis.text.x = element_text("Arial", size = 10)) +
+                                        transfm = "none") +
+  theme(axis.title = element_text(size = 10),
+        axis.text.x = element_text(size = 10)) +
   scale_fill_manual(values = wes_palette("FantasticFox1", n = 5)) +
   scale_color_manual(values = wes_palette("FantasticFox1", n = 5)) +
   labs(title = "Other organic")
 
-ggsave(filename = "./plots/model74_marker_organic.jpeg", 
+ggsave(filename = "./plots/model74_marker_organic.pdf", 
        plot = marker_organic_plot, 
-       device = "jpeg", 
-       height = 75, 
+       device = "pdf", 
+       height = 125, 
        width = 200, 
        units = "mm")
 
@@ -328,25 +324,24 @@ round(r2_ml(model = model75_marker_pesticide),  # % var explained by moderator
 
 
 # plot
-marker_pesticide_plot <- orchard_plot_PCL(object = model75_marker_pesticide, 
+marker_pesticide_plot <- orchard_plot(object = model75_marker_pesticide, 
                                           mod = "Specific.Biomarker", 
-                                          est_point_size = 5,
-                                          alpha = 0.5,
+                                          group = "References",
+                                          trunk.size = 10,
                                           cb = FALSE,
+                                          data = df_pesticide,
                                           xlab = "lnRR", 
-                                          ylab = "Biomarker",
-                                          transfm = "none", 
-                                          angle = 45) +
-  theme(axis.title = element_text("Arial", size = 10),
-        axis.text.x = element_text("Arial", size = 10)) +
+                                          transfm = "none") +
+  theme(axis.title = element_text(size = 10),
+        axis.text.x = element_text(size = 10)) +
   scale_fill_manual(values = wes_palette("FantasticFox1", n = 5)) +
   scale_color_manual(values = wes_palette("FantasticFox1", n = 5)) +
   labs(title = "Pesticide")
 
-ggsave(filename = "./plots/model75_marker_pesticide.jpeg", 
+ggsave(filename = "./plots/model75_marker_pesticide.pdf", 
        plot = marker_pesticide_plot, 
-       device = "jpeg", 
-       height = 75, 
+       device = "pdf", 
+       height = 125, 
        width = 200, 
        units = "mm")
 

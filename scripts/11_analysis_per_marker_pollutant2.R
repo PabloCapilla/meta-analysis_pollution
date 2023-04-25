@@ -29,11 +29,11 @@ source("./scripts/0a_R_library/orchard_plot_PCL_noApples.R")
 
 ## 
 ## phylogeny corr matrix
-phylo_cor <- readRDS("./results/clean_data/20220225_data_phylo_cor.RDS")
+phylo_cor <- readRDS("./results/clean_data/20221011_data_phylo_cor.RDS")
 
 ##
 ## effect size data
-df00  <- readRDS("./results/clean_data/clean_analysis_20220225.RDS")
+df00  <- readRDS("./results/clean_data/clean_analysis_20221011.RDS")
 head(df00)
 
 ##
@@ -99,7 +99,7 @@ model11_marker_inorganic <- rma.mv(yi=lnRR,
                                    verbose = T)
 
 saveRDS(object = model11_marker_inorganic, file = "./results/models/model11_marker_inorganic.RDS")
-#model41_marker_herbicide <- readRDS(file = "./results/models/model11_marker_inorganic.RDS")
+#model11_marker_inorganic <- readRDS(file = "./results/models/model11_marker_inorganic.RDS")
 
 summary(model11_marker_inorganic)
 round(r2_ml(model = model11_marker_inorganic),  # % var explained by moderator
@@ -107,25 +107,24 @@ round(r2_ml(model = model11_marker_inorganic),  # % var explained by moderator
 
 
 # plot
-biomarker_inorganic_plot <- orchard_plot_PCL(object = model11_marker_inorganic, 
+biomarker_inorganic_plot <- orchard_plot(object = model11_marker_inorganic, 
                                              mod = "Biomarker.Category", 
-                                             est_point_size = 5,
-                                             alpha = 0.5,
+                                             group = "References",
+                                             trunk.size = 10,
                                              cb = FALSE,
+                                             data = df_inorganic,
                                              xlab = "lnRR", 
-                                             ylab = "Biomarker",
-                                             transfm = "none", 
-                                             angle = 45) +
-  theme(axis.title = element_text("Arial", size = 10),
-        axis.text.x = element_text("Arial", size = 10)) +
+                                             transfm = "none") +
+  theme(axis.title = element_text(size = 10),
+        axis.text.x = element_text(size = 10)) +
   scale_fill_manual(values = wes_palette("FantasticFox1", n = 3)) +
   scale_color_manual(values = wes_palette("FantasticFox1", n = 3)) +
   labs(title = "Inorganic")
 
-ggsave(filename = "./plots/model11_marker_inorganic.jpeg", 
+ggsave(filename = "./plots/model11_marker_inorganic.pdf", 
        plot = biomarker_inorganic_plot, 
-       device = "jpeg", 
-       height = 75, 
+       device = "pdf", 
+       height = 125, 
        width = 200, 
        units = "mm")
 
@@ -167,24 +166,23 @@ round(r2_ml(model = model11_marker_organic),  # % var explained by moderator
 
 
 # plot
-biomarker_organic_plot <- orchard_plot_PCL(object = model11_marker_organic, 
+biomarker_organic_plot <- orchard_plot(object = model11_marker_organic, 
                                              mod = "Biomarker.Category", 
-                                             est_point_size = 5,
-                                             alpha = 0.5,
-                                             cb = FALSE,
-                                             xlab = "lnRR", 
-                                             ylab = "Biomarker",
-                                             transfm = "none", 
-                                             angle = 45) +
-  theme(axis.title = element_text("Arial", size = 10),
-        axis.text.x = element_text("Arial", size = 10)) +
+                                           group = "References",
+                                           trunk.size = 10,
+                                           cb = FALSE,
+                                           data = df_organic,
+                                           xlab = "lnRR", 
+                                           transfm = "none") +
+  theme(axis.title = element_text(size = 10),
+        axis.text.x = element_text(size = 10)) +
   scale_fill_manual(values = wes_palette("FantasticFox1", n = 3)) +
   scale_color_manual(values = wes_palette("FantasticFox1", n = 3)) +
   labs(title = "Organic")
 
-ggsave(filename = "./plots/model11_marker_organic.jpeg", 
+ggsave(filename = "./plots/model11_marker_organic.pdf", 
        plot = biomarker_organic_plot, 
-       device = "jpeg", 
-       height = 75, 
+       device = "pdf", 
+       height = 125, 
        width = 200, 
        units = "mm")

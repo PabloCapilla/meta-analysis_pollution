@@ -28,11 +28,11 @@ source("./scripts/0a_R_library/orchard_plot_PCL_noApples.R")
 
 ## 
 ## phylogeny corr matrix
-phylo_cor <- readRDS("./results/clean_data/20220225_data_phylo_cor.RDS")
+phylo_cor <- readRDS("./results/clean_data/20221011_data_phylo_cor.RDS")
 
 ##
 ## effect size data
-df00  <- readRDS("./results/clean_data/clean_analysis_20220225.RDS")
+df00  <- readRDS("./results/clean_data/clean_analysis_20221011.RDS")
 head(df00)
 
 ##
@@ -121,25 +121,24 @@ saveRDS(object = model10_whole_tad, file = "./results/models/model10_whole_tad.R
 ##
 library(wesanderson)
 names(wes_palettes)
-whole_tad_plot <- orchard_plot_PCL(object = model10_whole_tad, 
+whole_tad_plot <- orchard_plot(object = model10_whole_tad, 
                                    mod = "Biomarker.Category", 
-                                   est_point_size = 5,
-                                   alpha = 0.5,
-                                   cb = FALSE,
-                                   xlab = "lnRR", 
-                                   ylab = "Biomarker",
-                                   transfm = "none", 
-                                   angle = 45) +
-  theme(axis.title = element_text("Arial", size = 15),
-        axis.text.x = element_text("Arial", size = 15)) +
+                               group = "References",
+                               trunk.size = 10,
+                               cb = FALSE,
+                               data = df_Whole_tadpole,
+                               xlab = "lnRR", 
+                               transfm = "none") +
+  theme(axis.title = element_text(size = 15),
+        axis.text.x = element_text(size = 15)) +
   scale_fill_manual(values = wes_palette("FantasticFox1", n = 3)) +
   scale_color_manual(values = wes_palette("FantasticFox1", n = 3)) +
   labs(title = "Tadpoles")
   
 
-ggsave(filename = "./plots/model10_whole_tad.jpeg", 
+ggsave(filename = "./plots/model10_whole_tad.pdf", 
        plot = whole_tad_plot, 
-       device = "jpeg", 
+       device = "pdf", 
        height = 100, 
        width = 200, 
        units = "mm")
@@ -185,24 +184,23 @@ model10_whole_embryo <- readRDS("./results/models/model10_whole_embryo.RDS")    
 
 library(wesanderson)
 names(wes_palettes)
-whole_embryo_plot <- orchard_plot_PCL(object = model10_whole_embryo, 
+whole_embryo_plot <- orchard_plot(object = model10_whole_embryo, 
                                    mod = "Biomarker.Category", 
-                                   est_point_size = 5,
-                                   alpha = 0.5,
-                                   cb = FALSE,
-                                   xlab = "lnRR", 
-                                   ylab = "Biomarker",
-                                   transfm = "none", 
-                                   angle = 45) +
-  theme(axis.title = element_text("Arial", size = 15),
-        axis.text.x = element_text("Arial", size = 15)) +
+                                  group = "References",
+                                  trunk.size = 10,
+                                  cb = FALSE,
+                                  data = df_Whole_tadpole,
+                                  xlab = "lnRR", 
+                                  transfm = "none") +
+  theme(axis.title = element_text(size = 15),
+        axis.text.x = element_text(size = 15)) +
   scale_fill_manual(values = wes_palette("FantasticFox1", n = 3)) +
   scale_color_manual(values = wes_palette("FantasticFox1", n = 3)) +
   labs(title = "Embryo")
 
-ggsave(filename = "./plots/model10_whole_embryo.jpeg", 
+ggsave(filename = "./plots/model10_whole_embryo.pdf", 
        plot = whole_embryo_plot, 
-       device = "jpeg", 
+       device = "pdf", 
        height = 100, 
        width = 200, 
        units = "mm")
@@ -263,25 +261,24 @@ saveRDS(object = model10_liver_tad, file = "./results/models/model10_liver_tad.R
 ##
 library(wesanderson)
 names(wes_palettes)
-liver_tad_plot <- orchard_plot_PCL(object = model10_liver_tad, 
+liver_tad_plot <- orchard_plot(object = model10_liver_tad, 
                                    mod = "Biomarker.Category", 
-                                   est_point_size = 5,
-                                   alpha = 0.5,
+                                   group = "References",
+                                   trunk.size = 10,
                                    cb = FALSE,
+                                   data = df_liver_tadpole,
                                    xlab = "lnRR", 
-                                   ylab = "Biomarker",
-                                   transfm = "none", 
-                                   angle = 45) +
-  theme(axis.title = element_text("Arial", size = 15),
-        axis.text.x = element_text("Arial", size = 15)) +
+                                   transfm = "none") +
+  theme(axis.title = element_text(size = 15),
+        axis.text.x = element_text(size = 15)) +
   scale_fill_manual(values = wes_palette("FantasticFox1", n = 3)) +
   scale_color_manual(values = wes_palette("FantasticFox1", n = 3)) +
   labs(title = "Tadpoles")
 
 
-ggsave(filename = "./plots/model10_liver_tad.jpeg", 
+ggsave(filename = "./plots/model10_liver_tad.pdf", 
        plot = liver_tad_plot, 
-       device = "jpeg", 
+       device = "pdf", 
        height = 100, 
        width = 200, 
        units = "mm")
@@ -327,24 +324,23 @@ model10_liver_adults <- readRDS("./results/models/model10_liver_adults.RDS")    
 
 library(wesanderson)
 names(wes_palettes)
-liver_adults_plot <- orchard_plot_PCL(object = model10_liver_adults, 
+liver_adults_plot <- orchard_plot(object = model10_liver_adults, 
                                       mod = "Biomarker.Category", 
-                                      est_point_size = 5,
-                                      alpha = 0.5,
+                                      group = "References",
+                                      trunk.size = 10,
                                       cb = FALSE,
+                                      data = df_liver_adults,
                                       xlab = "lnRR", 
-                                      ylab = "Biomarker",
-                                      transfm = "none", 
-                                      angle = 45) +
-  theme(axis.title = element_text("Arial", size = 15),
-        axis.text.x = element_text("Arial", size = 15)) +
+                                      transfm = "none") +
+  theme(axis.title = element_text(size = 15),
+        axis.text.x = element_text(size = 15)) +
   scale_fill_manual(values = wes_palette("FantasticFox1", n = 3)) +
   scale_color_manual(values = wes_palette("FantasticFox1", n = 3)) +
   labs(title = "Adults")
 
-ggsave(filename = "./plots/model10_liver_adults.jpeg", 
+ggsave(filename = "./plots/model10_liver_adults.pdf", 
        plot = liver_adults_plot, 
-       device = "jpeg", 
+       device = "pdf", 
        height = 100, 
        width = 200, 
        units = "mm")

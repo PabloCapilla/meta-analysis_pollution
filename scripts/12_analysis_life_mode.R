@@ -104,8 +104,8 @@ system.time(
                                         ~1 | Observations), 
                           R = list(Species_phylo = phylo_cor),
                           Rscale = "cor",
-                          #data = df00, 
-                          data = df_test, 
+                          data = df00, 
+                          #data = df_test, 
                           method = "REML", 
                           control=list(optimizer="optimParallel",ncpus=3),
                           sparse = F)
@@ -117,14 +117,12 @@ round(i2_ml(model = overall_model, # heterogeneity values
       digits = 4) 
 
 # save model output
-saveRDS(object = overall_model, file = "./results/models/overall_model1.RDS")
-saveRDS(object = overall_model, file = "./results/models/model1_overall_trimmed.RDS")
+#saveRDS(object = overall_model, file = "./results/models/life_cycle_model.RDS")
 
 
 ##
 ## read models back and plot
-model1 <- readRDS("./results/models/model1_overall.RDS")          # warning present
-model1_trimmed <- readRDS("./results/models/model1_overall_trimmed.RDS") # warning not present
+overall_model <- readRDS("./results/models/life_cycle_model.RDS")          # warning present
 
 ##
 ## compare outputs
@@ -144,24 +142,24 @@ round(i2_ml(model = model1_25, method = "ns"),
 ##### Plot Overall model #####
 ##
 ##
-overall_plot <- orchard_plot(object = overall_model, 
+lifehistory_plot <- orchard_plot(object = overall_model, 
                                  mod = "Life_cycle2", 
-                                 #est_point_size = 5,
-                                 alpha = 0.25,
-                                 cb = FALSE,
-                                 xlab = "lnRR", 
-                                 #ylab = "Intercept",
-                                 transfm = "none") +
-  theme(axis.title = element_text("Arial", size = 15),
+                             group = "References",
+                             trunk.size = 10,
+                             cb = FALSE,
+                             data = df00,
+                             xlab = "lnRR", 
+                             transfm = "none") +
+  theme(axis.title = element_text(size = 15),
         axis.text.y = element_blank(),
         axis.text.x = element_text("Arial", size = 15)) +
   scale_fill_manual(values = "#bdbdbd") +
   scale_color_manual(values = "#bdbdbd") 
 
 
-ggsave(filename = "./plots/model1_overall.jpeg", 
-       plot = overall_plot, 
-       device = "jpeg", 
+ggsave(filename = "./plots/model1_life_history.pdf", 
+       plot = lifehistory_plot, 
+       device = "pdf", 
        height = 100, 
        width = 200, 
        units = "mm")
