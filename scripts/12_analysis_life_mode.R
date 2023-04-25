@@ -152,10 +152,9 @@ lifehistory_plot <- orchard_plot(object = overall_model,
                              transfm = "none") +
   theme(axis.title = element_text(size = 15),
         axis.text.y = element_blank(),
-        axis.text.x = element_text("Arial", size = 15)) +
-  scale_fill_manual(values = "#bdbdbd") +
-  scale_color_manual(values = "#bdbdbd") 
-
+        axis.text.x = element_text(size = 15)) +
+  scale_fill_manual(values = wes_palette("FantasticFox1", n = 2)) +
+  scale_color_manual(values = wes_palette("FantasticFox1", n = 2)) 
 
 ggsave(filename = "./plots/model1_life_history.pdf", 
        plot = lifehistory_plot, 
