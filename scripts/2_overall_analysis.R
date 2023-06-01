@@ -34,6 +34,17 @@ phylo_cor <- readRDS("./results/clean_data/20221011_data_phylo_cor.RDS")
 df00  <- readRDS("./results/clean_data/clean_analysis_20221011.RDS")
 head(df00)
 
+length(unique(df00$References))
+
+
+df00[df00$References == "Lajmanovich et al 2015",]
+
+write.csv(x = df00 %>% 
+            group_by(References) %>% 
+            filter(row_number() == 1) %>% 
+            select(References) %>% 
+            arrange(References), 
+          file = "./list_papers_meta-analysis.csv")
 ##
 ##
 ##### Changing species names to match phylo covar matrix and cross-checking #####
