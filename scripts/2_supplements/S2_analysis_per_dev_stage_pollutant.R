@@ -201,7 +201,7 @@ df_herbicide_embryos <- df00 %>%
   filter(Pollutant.Class_2b == "Herbicide") %>% 
   filter(Developmental.Stage == "Embryo")
 
-## only 4 observations
+## only 5 observations
 
 ##
 ## tadpoles
@@ -491,7 +491,7 @@ df_inorganic_adult <- df00 %>%
 
 ##
 ##
-##### Panel for Inorganic elements #####
+##### Panel for other inorganic elements #####
 ##
 ##
 inorganic_panel <- ggarrange(plot_inorganic_tadpoles, plot_inorganic_embryos, 
@@ -504,3 +504,106 @@ ggsave(filename = "./plots/Figure S5d - other inorganic elements.pdf.pdf",
        width = 175, 
        units = "mm")
 #####
+
+##
+##### Models for other organic elements #####
+##
+
+##
+## embryos
+df_organic_embryos <- df00 %>% 
+  filter(Pollutant.Class_2b == "Others_organic_compound") %>% 
+  filter(Developmental.Stage == "Embryo")
+
+## no data 
+
+##
+## tadpoles
+df_organic_tadpoles <- df00 %>% 
+  filter(Pollutant.Class_2b == "Others_organic_compound") %>% 
+  filter(Developmental.Stage == "Tadpole")
+
+# model
+model_organic_tadpoles <- rma.mv(yi=lnRR, 
+                                   V=lnRR.sv, 
+                                   mods = ~ Biomarker.Category - 1, 
+                                   random = list(~1 | References,
+                                                 ~1 | Species,
+                                                 ~1 | Species_phylo,
+                                                 ~1 | Observations), 
+                                   R = list(Species_phylo = phylo_cor),
+                                   Rscale = "cor",
+                                   data = df_organic_tadpoles, 
+                                   method = "REML", 
+                                   sparse = F, 
+                                   verbose = T)
+summary(model_organic_tadpoles)
+
+# plot
+plot_organic_tadpoles <- orchard_plot(object = model_organic_tadpoles, 
+                                        mod = "Biomarker.Category", 
+                                        group = "References",
+                                        trunk.size = 10,
+                                        cb = FALSE,
+                                        xlab = "lnRR", 
+                                        transfm = "none") +
+  theme(axis.title = element_text(size = 10),
+        axis.text.x = element_text(size = 10)) +
+  scale_fill_manual(values = wes_palette("FantasticFox1", n = 3)) +
+  scale_color_manual(values = wes_palette("FantasticFox1", n = 3)) +
+  labs(title = "Tadpoles")
+
+##
+## adults
+
+# data adults
+df_organic_adult <- df00 %>% 
+  filter(Pollutant.Class_2b == "Others_organic_compound") %>% 
+  filter(Developmental.Stage == "Adult")
+
+# model
+model_organic_adults <- rma.mv(yi=lnRR, 
+                                 V=lnRR.sv, 
+                                 mods = ~ Biomarker.Category - 1, 
+                                 random = list(~1 | References,
+                                               ~1 | Species,
+                                               ~1 | Species_phylo,
+                                               ~1 | Observations), 
+                                 R = list(Species_phylo = phylo_cor),
+                                 Rscale = "cor",
+                                 data = df_organic_adult, 
+                                 method = "REML", 
+                                 sparse = F, 
+                                 verbose = T)
+summary(model_organic_adults)
+
+# plot
+plot_organic_adults <- orchard_plot(object = model_organic_adults, 
+                                      mod = "Biomarker.Category", 
+                                      group = "References",
+                                      trunk.size = 10,
+                                      cb = FALSE,
+                                      xlab = "lnRR", 
+                                      transfm = "none") +
+  theme(axis.title = element_text(size = 10),
+        axis.text.x = element_text(size = 10)) +
+  scale_fill_manual(values = wes_palette("FantasticFox1", n = 3)) +
+  scale_color_manual(values = wes_palette("FantasticFox1", n = 3)) +
+  labs(title = "Tadpoles")
+
+##
+##
+##### Panel for organic elements #####
+##
+##
+organic_panel <- ggarrange(plot_organic_adults, plot_organic_tadpoles, 
+                             ncol = 1, nrow = 2)
+
+ggsave(filename = "./plots/Figure S5e - other organic elements.pdf.pdf", 
+       plot = organic_panel, 
+       device = "pdf", 
+       height = 150, 
+       width = 175, 
+       units = "mm")
+#####
+

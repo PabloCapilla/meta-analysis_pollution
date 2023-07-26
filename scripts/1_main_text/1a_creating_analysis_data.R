@@ -35,7 +35,7 @@ source("./scripts/0a_R_library/functions.R")
 ## effect size data
 df00  <- read.xlsx("./data/Full_dataset.xlsx",
                    colNames=T,
-                   sheet = 2)
+                   sheet = 1)
 
 #####
 
