@@ -291,7 +291,7 @@ plot_herbicide_adult <- orchard_plot(object = model_herbicide_adult,
 herbicide_panel <- ggarrange(plot_herbicide_tadpoles, plot_herbicide_adult,
                              ncol = 1, nrow = 2)
 
-ggsave(filename = "./plots/Figure S5b - herbicide", 
+ggsave(filename = "./plots/Figure S5b - herbicide.pdf", 
        plot = herbicide_panel, 
        device = "pdf", 
        height = 180, 
