@@ -202,7 +202,7 @@ biomarker_adult_plot <- orchard_plot(object = model33_marker_adult,
   scale_color_manual(values = wes_palette("FantasticFox1", n = 3)) +
   scale_y_continuous(limits = c(-3.75,3.75))
 
-ggsave(filename = "./plots/Figure 2c.odf", 
+ggsave(filename = "./plots/Figure 2c.pdf", 
        plot = biomarker_adult_plot, 
        device = "pdf", 
        height = 75, 
