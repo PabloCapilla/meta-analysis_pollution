@@ -6,8 +6,6 @@
 
 Colette Martin, Pablo Capilla-Lasheras, Pat Monaghan & Pablo Burraco. **The impact of chemical pollution across major life transitions: a meta-analysis on oxidative stress in amphibians**. *bioRxiv*. DOI: 10.1101/2023.09.04.556172v1
 
-<sup>#</sup> joint first authors
-
 ---
 
 For any further information, please contact the corresponding author: [Pablo Burraco](https://scholar.google.com/citations?user=X4G3ECgAAAAJ&hl=es), email: burraco@ebd.csic.es
