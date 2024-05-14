@@ -31,11 +31,11 @@ source("./scripts/0a_R_library/functions.R")
 
 ## 
 ## phylogeny corr matrix
-phylo_cor <- readRDS("./results/clean_data/data_phylo_cor_20230724.RDS")
+phylo_cor <- readRDS("./results/clean_data/data_phylo_cor_20240513.RDS")
 
 ##
 ## effect size data
-df00  <- readRDS("./results/clean_data/clean_analysis_20230724.RDS")
+df00  <- readRDS("./results/clean_data/clean_analysis_20240513.RDS")
 head(df00)
 
 #####
@@ -67,7 +67,7 @@ model_tissue <- rma.mv(yi=lnRR,
                        Rscale = "cor",
                        data = df_tissue, 
                        method = "REML", 
-                       control=list(optimizer="optimParallel",ncpus=5),
+                       control=list(optimizer="optimParallel",ncpus=8),
                        sparse = F)
 ##
 ## The rma.mv function produces a warning due to ratio of largest to smallest sampling variance extremely large. 
@@ -90,7 +90,7 @@ saveRDS(object = model_tissue, file = "./results/models/model_tissue.RDS")
 biomarker_plot <- orchard_plot(object = model_tissue, 
                                mod = "Biological.Matrix", 
                                group = "References",
-                               trunk.size = 10,
+                               trunk.size = 2.0,
                                cb = FALSE,
                                xlab = "lnRR", 
                                transfm = "none") +
@@ -101,6 +101,13 @@ biomarker_plot <- orchard_plot(object = model_tissue,
 ggsave(filename = "./plots/Figure S4.pdf", 
        plot = biomarker_plot, 
        device = "pdf", 
+       height = 100, 
+       width = 200, 
+       units = "mm")
+
+ggsave(filename = "./plots/Figure S4.png", 
+       plot = biomarker_plot, 
+       device = "png", 
        height = 100, 
        width = 200, 
        units = "mm")

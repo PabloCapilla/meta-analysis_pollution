@@ -35,23 +35,24 @@ library(ggtree)
 ##
 ##### data #####
 ##
-df00  <- readRDS("./results/clean_data/clean_analysis_20230724.RDS")
+df00  <- readRDS("./results/clean_data/clean_analysis_20240513.RDS")
 head(df00)
+unique(df00$Species)
 
 #####
 
 ##
 ##### creating phylo rel matrix #####
 ##
-taxa.corrected <- tnrs_match_names(names = unique(df00$Species))
+taxa.corrected <- tnrs_match_names(names = unique(df00$Species), do_approximate_matching = T)
 
-# check approximate matches: none it seems, good
+# check approximate matches: none, good
 taxa.corrected[taxa.corrected$approximate_match==TRUE,]
 
-# check synonyms matches: two. Rana pipiens checked; Rana catesbeiana checked
+# check synonyms matches: none, good
 taxa.corrected[taxa.corrected$is_synonym==TRUE,]
 
-# check number of matches: none it seems, good
+# check number of matches: none, good
 taxa.corrected[taxa.corrected$number_matches>1,]
 
 # retrieving phylogenetic relationships among taxa in the form of a trimmed sub-tree
@@ -86,5 +87,5 @@ phylo_cor <- vcv(phylo_branch, cor = T)
 
 # 
 # save matrix for analyses
-saveRDS(phylo_cor, file = "./results/clean_data/data_phylo_cor_20230724.RDS")
+saveRDS(phylo_cor, file = "./results/clean_data/data_phylo_cor_20240513.RDS")
 

@@ -31,11 +31,11 @@ source("./scripts/0a_R_library/functions.R")
 
 ## 
 ## phylogeny corr matrix
-phylo_cor <- readRDS("./results/clean_data/data_phylo_cor_20230724.RDS")
+phylo_cor <- readRDS("./results/clean_data/data_phylo_cor_20240513.RDS")
 
 ##
 ## effect size data
-df00  <- readRDS("./results/clean_data/clean_analysis_20230724.RDS")
+df00  <- readRDS("./results/clean_data/clean_analysis_20240513.RDS")
 head(df00)
 
 #####
@@ -76,7 +76,7 @@ saveRDS(object = model31_marker_embryo, file = "./results/models/model31_marker_
 biomarker_embryo_plot <- orchard_plot(object = model31_marker_embryo, 
                                       mod = "Biomarker.Category", 
                                       group = "References",
-                                      trunk.size = 10,
+                                      trunk.size = 2.0,
                                       cb = FALSE,
                                       xlab = "lnRR", 
                                       transfm = "none") +
@@ -134,7 +134,7 @@ saveRDS(object = model32_marker_Tadpole, file = "./results/models/model32_marker
 biomarker_tadpole_plot <- orchard_plot(object = model32_marker_Tadpole, 
                                           mod = "Biomarker.Category", 
                                           group = "References",
-                                          trunk.size = 10,
+                                          trunk.size = 2.0,
                                           cb = FALSE,
                                           xlab = "lnRR", 
                                           transfm = "none") +
@@ -192,7 +192,7 @@ saveRDS(object = model33_marker_adult, file = "./results/models/model33_marker_a
 biomarker_adult_plot <- orchard_plot(object = model33_marker_adult, 
                                           mod = "Biomarker.Category", 
                                          group = "References",
-                                         trunk.size = 10,
+                                         trunk.size = 2,
                                          cb = FALSE,
                                          xlab = "lnRR", 
                                          transfm = "none") +

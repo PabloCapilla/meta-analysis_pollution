@@ -31,17 +31,17 @@ source("./scripts/0a_R_library/functions.R")
 
 ## 
 ## phylogeny corr matrix
-phylo_cor <- readRDS("./results/clean_data/data_phylo_cor_20230724.RDS")
+phylo_cor <- readRDS("./results/clean_data/data_phylo_cor_20240513.RDS")
 
 ##
 ## effect size data
-df00  <- readRDS("./results/clean_data/clean_analysis_20230724.RDS")
+df00  <- readRDS("./results/clean_data/clean_analysis_20240513.RDS")
 head(df00)
 
 ## creating new variables to test small-study effects and time lag effects
 df00 <- df00 %>% 
   mutate(sqrt_inv_eff_ss = sqrt((1/Treatment.N) + (1/Control.N.adj)),
-         publication_year = extract_numeric(sub(pattern = ' ', 
+         publication_year = readr::parse_number(sub(pattern = ' ', 
                                                 replacement = '', 
                                                 x = substr(df00$References, 
                                                            nchar(df00$References) - 5 + 1, 

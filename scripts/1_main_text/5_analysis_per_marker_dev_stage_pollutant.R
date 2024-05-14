@@ -31,18 +31,27 @@ source("./scripts/0a_R_library/functions.R")
 
 ## 
 ## phylogeny corr matrix
-phylo_cor <- readRDS("./results/clean_data/data_phylo_cor_20230724.RDS")
+phylo_cor <- readRDS("./results/clean_data/data_phylo_cor_20240513.RDS")
 
 ##
 ## effect size data
-df00  <- readRDS("./results/clean_data/clean_analysis_20230724.RDS")
+df00  <- readRDS("./results/clean_data/clean_analysis_20240513.RDS")
 head(df00)
 
 #####
 
 ##
-## data summaries 
-table(df00$Developmental.Stage, df00$Pollutant.Class_3)
+## data summaries
+
+# number of effect sizes
+table(df00$Developmental.Stage, df00$Pollutant.Class_3, df00$Biomarker.Category)
+
+# number of studies
+df_studies <- df00 %>% 
+  group_by(References, Developmental.Stage, Pollutant.Class_3, Biomarker.Category) %>% 
+  filter(row_number() == 1) 
+table(df_studies$Developmental.Stage, df_studies$Pollutant.Class_3, df_studies$Biomarker.Category)
+
 
 ##
 ##### Models for Organic compound #####
@@ -74,7 +83,7 @@ summary(model_organic_embryos)
 plot_organic_embryos <- orchard_plot(object = model_organic_embryos, 
                                      mod = "Biomarker.Category", 
                                      group = "References",
-                                     trunk.size = 10,
+                                     trunk.size = 2,
                                      cb = FALSE,
                                      xlab = "lnRR", 
                                      transfm = "none") +
@@ -114,7 +123,7 @@ summary(model_organic_tadpoles)
 plot_organic_tadpoles <- orchard_plot(object = model_organic_tadpoles, 
                                       mod = "Biomarker.Category", 
                                       group = "References",
-                                      trunk.size = 10,
+                                      trunk.size = 2,
                                       cb = FALSE,
                                       xlab = "lnRR", 
                                       transfm = "none") +
@@ -156,7 +165,7 @@ summary(model_organic_adult)
 plot_organic_adult <- orchard_plot(object = model_organic_adult, 
                                    mod = "Biomarker.Category", 
                                    group = "References",
-                                   trunk.size = 10,
+                                   trunk.size = 2,
                                    cb = FALSE,
                                    xlab = "lnRR", 
                                    transfm = "none") +
@@ -204,6 +213,7 @@ model_inorganic_embryos <- rma.mv(yi=lnRR,
                                                 ~1 | Species_phylo,
                                                 ~1 | Observations), 
                                   R = list(Species_phylo = phylo_cor),
+                                  control=list(optimizer="BFGS"),
                                   Rscale = "cor",
                                   data = df_inorganic_embryos, 
                                   method = "REML", 
@@ -215,7 +225,7 @@ summary(model_inorganic_embryos)
 plot_inorganic_embryos <- orchard_plot(object = model_inorganic_embryos, 
                                        mod = "Biomarker.Category", 
                                        group = "References",
-                                       trunk.size = 10,
+                                       trunk.size = 2,
                                        cb = FALSE,
                                        xlab = "lnRR", 
                                        transfm = "none") +
@@ -255,7 +265,7 @@ summary(model_inorganic_tadpoles)
 plot_inorganic_tadpoles <- orchard_plot(object = model_inorganic_tadpoles, 
                                         mod = "Biomarker.Category", 
                                         group = "References",
-                                        trunk.size = 10,
+                                        trunk.size = 2,
                                         cb = FALSE,
                                         xlab = "lnRR", 
                                         transfm = "none") +
@@ -297,7 +307,7 @@ summary(model_inorganic_adult)
 plot_inorganic_adult <- orchard_plot(object = model_inorganic_adult, 
                                      mod = "Biomarker.Category", 
                                      group = "References",
-                                     trunk.size = 10,
+                                     trunk.size = 2,
                                      cb = FALSE,
                                      xlab = "lnRR", 
                                      transfm = "none") +

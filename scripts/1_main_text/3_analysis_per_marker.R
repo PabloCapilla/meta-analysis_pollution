@@ -31,11 +31,11 @@ source("./scripts/0a_R_library/functions.R")
 
 ## 
 ## phylogeny corr matrix
-phylo_cor <- readRDS("./results/clean_data/data_phylo_cor_20230724.RDS")
+phylo_cor <- readRDS("./results/clean_data/data_phylo_cor_20240513.RDS")
 
 ##
 ## effect size data
-df00  <- readRDS("./results/clean_data/clean_analysis_20230724.RDS")
+df00  <- readRDS("./results/clean_data/clean_analysis_20240513.RDS")
 head(df00)
 
 #####
@@ -84,7 +84,7 @@ saveRDS(object = model2_marker, file = "./results/models/model2_marker.RDS")
 biomarker_plot <- orchard_plot(object = model2_marker, 
                                mod = "Biomarker.Category", 
                                group = "References",
-                               trunk.size = 10,
+                               trunk.size = 2.0,
                                cb = FALSE,
                                xlab = "lnRR", 
                                transfm = "none") +

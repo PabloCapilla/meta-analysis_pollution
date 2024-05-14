@@ -22,7 +22,7 @@ rm(list=ls())
 ##
 ##### libraries & functions ####
 ##
-pacman::p_load(openxlsx, dplyr, tidyr, metafor) 
+pacman::p_load(openxlsx, dplyr, tidyr, metafor, ggplot2) 
 source("./scripts/0a_R_library/functions.R")
 
 #####
@@ -33,7 +33,7 @@ source("./scripts/0a_R_library/functions.R")
 
 ##
 ## effect size data
-df00  <- read.xlsx("./data/Full_dataset.xlsx",
+df00  <- read.xlsx("./data/Full_dataset_revision.xlsx",
                    colNames=T,
                    sheet = 1)
 
@@ -173,6 +173,12 @@ head(df04)
 ##
 df04[df04$Species == "Lithobates pipiens", "Species"] <- "Rana pipiens" 
 df04[df04$Species == "Lithobates catesbeianus", "Species"] <- "Rana catesbeiana" 
+df04[df04$Species == "Aquarana catesbeianus", "Species"] <- "Rana catesbeiana" 
+df04[df04$Species == "Rana nigromaculata", "Species"] <- 'Pelophylax nigromaculatus'
+df04[df04$Species == "Bufo raddei", "Species"] <- 'Strauchbufo raddei' 
+df04[df04$Species == "Rana saharica", "Species"] <- "Pelophylax saharicus"   
+df04[df04$Species == "Rana ridibunda", "Species"] <- "Pelophylax ridibundus"
+
 df04$Species_phylo <- df04$Species # replicating species column for phylo analysis
 head(df04)
 
@@ -184,7 +190,7 @@ head(df04)
 ##
 ##
 df04$Observations <- 1:nrow(df04)
-saveRDS(object = df04, file = "./results/clean_data/clean_analysis_20230724.RDS")
+saveRDS(object = df04, file = "./results/clean_data/clean_analysis_20240513.RDS")
 
 
 

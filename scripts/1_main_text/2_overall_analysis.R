@@ -20,7 +20,8 @@ rm(list=ls())
 ##
 ##### libraries & functions ####
 ##
-pacman::p_load(openxlsx, dplyr, tidyr, metafor, ggplot2, orchaRd) 
+#devtools::install_github("daniel1noble/orchaRd", ref = "main", force = TRUE)
+pacman::p_load(openxlsx, dplyr, tidyr, metafor, ggplot2, orchaRd, optimParallel) 
 source("./scripts/0a_R_library/functions.R")
 
 #####
@@ -31,11 +32,11 @@ source("./scripts/0a_R_library/functions.R")
 
 ## 
 ## phylogeny corr matrix
-phylo_cor <- readRDS("./results/clean_data/data_phylo_cor_20230724.RDS")
+phylo_cor <- readRDS("./results/clean_data/data_phylo_cor_20240513.RDS")
 
 ##
 ## effect size data
-df00  <- readRDS("./results/clean_data/clean_analysis_20230724.RDS")
+df00  <- readRDS("./results/clean_data/clean_analysis_20240513.RDS")
 head(df00)
 
 ##
@@ -61,6 +62,12 @@ table(df00$Species_phylo %in% colnames(phylo_cor)) # yes
 ##
 ##### sample size developmental phase, etc#####
 ##
+
+# overall
+length(unique(df00$References))
+length(unique(df00$Species))
+nrow(df00)
+
 table(df00$Developmental.Stage)
 table(df00$Developmental.Stage, df00$Biomarker.Category, df00$Pollutant.Class_3) # number of estimates
 
@@ -123,7 +130,7 @@ round(i2_ml(model = overall_model), digits = 4) # heterogeneity values
 overall_plot <- orchard_plot(object = overall_model, 
                              mod = "1", 
                              group = "References",
-                             trunk.size = 10,
+                             trunk.size = 2.5,
                              cb = FALSE,
                              xlab = "lnRR", 
                              transfm = "none") +
