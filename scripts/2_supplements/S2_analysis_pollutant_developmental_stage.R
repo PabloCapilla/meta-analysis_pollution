@@ -72,8 +72,13 @@ saveRDS(object = model_pollutant_dev_state, file = "./results/models/s2_model_po
 
 HetModel <- orchaRd::mod_results(model_pollutant_dev_state, 
                                  group = "References", 
-                                 mod = "Biomarker.Category", 
+                                 mod = "Pollutant.Class_3", 
                                  at = list(Developmental.Stage = unique(df00$Developmental.Stage)))
+
+HetModel <- orchaRd::mod_results(model_pollutant_dev_state, 
+                                 group = "References", 
+                                 mod = "Developmental.Stage", 
+                                 at = list(Pollutant.Class_3 = unique(df00$Pollutant.Class_3)))
 
 orchaRd::orchard_plot(HetModel, 
                       xlab = "lnRR",
