@@ -31,11 +31,11 @@ source("./scripts/0a_R_library/functions.R")
 
 ## 
 ## phylogeny corr matrix
-phylo_cor <- readRDS("./results/clean_data/data_phylo_cor_20240513.RDS")
+phylo_cor <- readRDS("./results/clean_data/data_phylo_cor_20240527.RDS")
 
 ##
 ## effect size data
-df00  <- readRDS("./results/clean_data/clean_analysis_20240513.RDS")
+df00  <- readRDS("./results/clean_data/clean_analysis_20240527.RDS")
 head(df00)
 
 ## creating new variables to test small-study effects and time lag effects
@@ -72,7 +72,7 @@ small_study_model <- rma.mv(yi=lnRR,
                          Rscale = "cor",
                          data = df00, 
                          method = "REML", 
-                         control=list(optimizer="optimParallel",ncpus=5),
+                         control=list(optimizer="optimParallel",ncpus=6),
                          sparse = F)
 ##
 ## The rma.mv function produces a warning due to ratio of largest to smallest sampling variance extremely large. 

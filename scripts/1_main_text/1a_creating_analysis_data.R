@@ -36,6 +36,13 @@ source("./scripts/0a_R_library/functions.R")
 df00  <- read.xlsx("./data/Full_dataset_revision.xlsx",
                    colNames=T,
                    sheet = 1)
+head(df00)
+
+##
+## remove studies that can't be included in the analysis (see reasons in the data table)
+df00 <- df00 %>% 
+  filter(Included.in.the.analysis == 'Yes')
+
 
 #####
 
@@ -190,7 +197,7 @@ head(df04)
 ##
 ##
 df04$Observations <- 1:nrow(df04)
-saveRDS(object = df04, file = "./results/clean_data/clean_analysis_20240513.RDS")
+saveRDS(object = df04, file = "./results/clean_data/clean_analysis_20240527.RDS")
 
 
 

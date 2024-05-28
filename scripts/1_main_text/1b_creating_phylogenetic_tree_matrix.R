@@ -35,7 +35,7 @@ library(ggtree)
 ##
 ##### data #####
 ##
-df00  <- readRDS("./results/clean_data/clean_analysis_20240513.RDS")
+df00  <- readRDS("./results/clean_data/clean_analysis_20240527.RDS")
 head(df00)
 unique(df00$Species)
 
@@ -87,5 +87,5 @@ phylo_cor <- vcv(phylo_branch, cor = T)
 
 # 
 # save matrix for analyses
-saveRDS(phylo_cor, file = "./results/clean_data/data_phylo_cor_20240513.RDS")
+saveRDS(phylo_cor, file = "./results/clean_data/data_phylo_cor_20240527.RDS")
 

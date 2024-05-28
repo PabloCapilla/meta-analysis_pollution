@@ -32,11 +32,11 @@ source("./scripts/0a_R_library/functions.R")
 
 ## 
 ## phylogeny corr matrix
-phylo_cor <- readRDS("./results/clean_data/data_phylo_cor_20240513.RDS")
+phylo_cor <- readRDS("./results/clean_data/data_phylo_cor_20240527.RDS")
 
 ##
 ## effect size data
-df00  <- readRDS("./results/clean_data/clean_analysis_20240513.RDS")
+df00  <- readRDS("./results/clean_data/clean_analysis_20240527.RDS")
 head(df00)
 
 ##
@@ -48,7 +48,6 @@ head(df00)
 #            arrange(References), 
 #          file = "./list_papers_meta-analysis.csv", 
 #          row.names = F)
-
 
 ## matching names between dataset and plylo cor?
 table(colnames(phylo_cor) %in% df00$Species) # yes
@@ -102,7 +101,7 @@ overall_model <- rma.mv(yi=lnRR,
                         Rscale = "cor",
                         data = df00, 
                         method = "REML", 
-                        control=list(optimizer="optimParallel",ncpus=4),
+                        control=list(optimizer="optimParallel",ncpus=6),
                         sparse = F)
 
 ##
