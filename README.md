@@ -1,4 +1,4 @@
-[![DOI](https://zenodo.org/badge/571951424.svg)](https://zenodo.org/doi/10.5281/zenodo.12746783)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.12746803.svg)](https://doi.org/10.5281/zenodo.12746803)
 
 
 # The impact of chemical pollution across major life transitions: a meta-analysis on oxidative stress in amphibians
